@@ -34,40 +34,45 @@ Constraints:
 **/
 // { Driver Code Starts
 //Initial template for C++
-
-#include <bits/stdc++.h>
+// C++ program to remove duplicates in-place
+#include<iostream>
 using namespace std;
 
+// Function to remove duplicate elements
+// This function returns new size of modified
+// array.
+int removeDuplicates(int arr[], int n)
+{
+	if (n==0 || n==1)
+		return n;
 
- // } Driver Code Ends
-//User function template for C++
+	// To store index of next unique element
+	int j = 0;
 
-class Solution{
-public:
-    int remove_duplicate(int a[],int n){
-        // code here
-    }
-};
+	// Doing same as done in Method 1
+	// Just maintaining another updated index i.e. j
+	for (int i=0; i < n-1; i++)
+		if (arr[i] != arr[i+1])
+			arr[j++] = arr[i];
 
-// { Driver Code Starts.
+	arr[j++] = arr[n-1];
+
+	return j;
+}
+
+// Driver code
 int main()
 {
-    int T;
-    cin>>T;
-    while(T--)
-    {
-        int N;
-        cin>>N;
-        int a[N];
-        for(int i=0;i<N;i++)
-        {
-            cin>>a[i];
-        }
-    Solution ob;
-    int n = ob.remove_duplicate(a,N);
+	int arr[] = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+	int n = sizeof(arr) / sizeof(arr[0]);
 
-    for(int i=0;i<n;i++)
-        cout<<a[i]<<" ";
-    cout<<endl;
-    }
-}  // } Driver Code Ends
+	// removeDuplicates() returns new size of
+	// array.
+	n = removeDuplicates(arr, n);
+
+	// Print updated array
+	for (int i=0; i<n; i++)
+		cout << arr[i] << " ";
+
+	return 0;
+}
