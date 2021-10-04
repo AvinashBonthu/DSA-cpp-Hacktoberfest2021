@@ -1,84 +1,42 @@
-/**
-2. Third largest element 
-Given an array of distinct elements. Find the third largest element in it. 
+// C++ program to find third Largest
+// element in an array of distinct elements
+#include <bits/stdc++.h>
 
-Example 1:
+void thirdLargest(int arr[], int arr_size)
+{
+	/* There should be atleast three elements */
+	if (arr_size < 3)
+	{
+		printf(" Invalid Input ");
+		return;
+	}
 
-Input:
-N = 5
-A[] = {2,4,1,3,5}
-Output: 3
-Example 2:
+	// Find first largest element
+	int first = arr[0];
+	for (int i = 1; i < arr_size ; i++)
+		if (arr[i] > first)
+			first = arr[i];
 
-Input:
-N = 2
-A[] = {10,2}
-Output: -1
-Your Task:
-Complete the function thirdLargest() which takes the array a[] and the size of the array, n, as input parameters and returns the third largest element in the array. It return -1 if there are less than 3 elements in the given array.
+	// Find second largest element
+	int second = INT_MIN;
+	for (int i = 0; i < arr_size ; i++)
+		if (arr[i] > second && arr[i] < first)
+			second = arr[i];
 
-Expected Time Complexity: O(N)
-Expected Auxiliary Space: O(1)
+	// Find third largest element
+	int third = INT_MIN;
+	for (int i = 0; i < arr_size ; i++)
+		if (arr[i] > third && arr[i] < second)
+			third = arr[i];
 
-Constraints:
-1 ≤ N ≤ 105
-1 ≤ A[i] ≤ 105
-**/
-// { Driver Code Starts
-#include<bits/stdc++.h>
-using namespace std; 
-
- // } Driver Code Ends
-class Solution{
-    public:
-    //Function to count the frequency of all elements from 1 to N in the array.
-    void frequencyCount(vector<int>& arr,int N, int P)
-    { 
-        vector <int> arr2(P,0) ;
-        for(int i =0;i<N;i++)
-            arr2.push_back(0);
-        for(int i=0;i<N;i++)
-            arr2[arr[i]-1]++;
-        arr=arr2;// code here
-    }
-};
-
-
-// { Driver Code Starts.
-
-int main() 
-{ 
-	long long t;
-	
-	//testcases
-	cin >> t;
-	
-	while(t--){
-	    
-	    int N, P;
-	    //size of array
-	    cin >> N; 
-	    
-	    vector<int> arr(N);
-	    
-	    //adding elements to the vector
-	    for(int i = 0; i < N ; i++){
-	        cin >> arr[i]; 
-	    }
-        cin >> P;
-        Solution ob;
-        //calling frequncycount() function
-		ob.frequencyCount(arr, N, P); 
-		
-		//printing array elements
-	    for (int i = 0; i < N ; i++) 
-			cout << arr[i] << " ";
-	    cout << endl;
-	}	
-	return 0; 
+	printf("The third Largest element is %d\n", third);
 }
 
-
-
-
-  // } Driver Code Ends
+/* Driver program to test above function */
+int main()
+{
+	int arr[] = {12, 13, 1, 10, 34, 16};
+	int n = sizeof(arr)/sizeof(arr[0]);
+	thirdLargest(arr, n);
+	return 0;
+}
